@@ -3,6 +3,7 @@ import { Menu, X, Globe, Moon, Sun } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,11 +11,11 @@ export const Navigation = () => {
   const { theme, toggleTheme } = useTheme();
 
   const navItems = [
-    { ar: 'الرئيسية', en: 'Home', href: '#home' },
-    { ar: 'الخدمات', en: 'Services', href: '#services' },
-    { ar: 'المشاريع', en: 'Projects', href: '#projects' },
-    { ar: 'من نحن', en: 'About', href: '#about' },
-    { ar: 'تواصل معنا', en: 'Contact', href: '#contact' },
+    { ar: 'الرئيسية', en: 'Home', href: '/', isRoute: true },
+    { ar: 'الخدمات', en: 'Services', href: '#services', isRoute: false },
+    { ar: 'المشاريع', en: 'Projects', href: '#projects', isRoute: false },
+    { ar: 'المدونة', en: 'Blog', href: '/blog', isRoute: true },
+    { ar: 'تواصل معنا', en: 'Contact', href: '#contact', isRoute: false },
   ];
 
   return (
@@ -39,14 +40,25 @@ export const Navigation = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6 rtl:space-x-reverse">
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-foreground hover:text-primary transition-colors duration-300 font-medium"
-                style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
-              >
-                {t(item.ar, item.en)}
-              </a>
+              item.isRoute ? (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className="text-foreground hover:text-primary transition-colors duration-300 font-medium"
+                  style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                >
+                  {t(item.ar, item.en)}
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-foreground hover:text-primary transition-colors duration-300 font-medium"
+                  style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                >
+                  {t(item.ar, item.en)}
+                </a>
+              )
             ))}
           </div>
 
@@ -84,15 +96,27 @@ export const Navigation = () => {
         {isOpen && (
           <div className="md:hidden pb-4 animate-slide-up">
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className="block py-3 px-4 text-foreground hover:bg-muted rounded-lg transition-colors"
-                style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
-              >
-                {t(item.ar, item.en)}
-              </a>
+              item.isRoute ? (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block py-3 px-4 text-foreground hover:bg-muted rounded-lg transition-colors"
+                  style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                >
+                  {t(item.ar, item.en)}
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block py-3 px-4 text-foreground hover:bg-muted rounded-lg transition-colors"
+                  style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                >
+                  {t(item.ar, item.en)}
+                </a>
+              )
             ))}
           </div>
         )}
