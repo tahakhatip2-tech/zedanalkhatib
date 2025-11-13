@@ -11,10 +11,42 @@ export const ProjectsSection = () => {
   const [filter, setFilter] = useState('all');
 
   const projects = [
-    { id: 1, image: arabicGate, category: 'arabic', titleAr: 'بوابة عربية فاخرة', titleEn: 'Luxury Arabic Gate' },
-    { id: 2, image: modernMetal, category: 'modern', titleAr: 'درابزين حديث', titleEn: 'Modern Railing' },
-    { id: 3, image: laserWork, category: 'laser', titleAr: 'نقش بالليزر', titleEn: 'Laser Engraving' },
-    { id: 4, image: metalArt, category: 'art', titleAr: 'منحوتة معدنية', titleEn: 'Metal Sculpture' },
+    { 
+      id: 1, 
+      image: arabicGate, 
+      category: 'arabic', 
+      titleAr: 'بوابة عربية فاخرة', 
+      titleEn: 'Luxury Arabic Gate',
+      descriptionAr: 'بوابة معدنية عربية فاخرة بتصميم تقليدي مع نقوش إسلامية معقدة',
+      descriptionEn: 'Luxury Arabic metal gate with traditional design and intricate Islamic patterns'
+    },
+    { 
+      id: 2, 
+      image: modernMetal, 
+      category: 'modern', 
+      titleAr: 'درابزين حديث', 
+      titleEn: 'Modern Railing',
+      descriptionAr: 'درابزين من الفولاذ المقاوم للصدأ بتصميم عصري وأنيق',
+      descriptionEn: 'Modern stainless steel railing with contemporary elegant design'
+    },
+    { 
+      id: 3, 
+      image: laserWork, 
+      category: 'laser', 
+      titleAr: 'نقش بالليزر', 
+      titleEn: 'Laser Engraving',
+      descriptionAr: 'نقش دقيق بالليزر على المعدن بتصاميم هندسية معاصرة',
+      descriptionEn: 'Precision laser engraving on metal with contemporary geometric designs'
+    },
+    { 
+      id: 4, 
+      image: metalArt, 
+      category: 'art', 
+      titleAr: 'منحوتة معدنية', 
+      titleEn: 'Metal Sculpture',
+      descriptionAr: 'عمل فني معدني مستوحى من التراث العربي بلمسة حديثة',
+      descriptionEn: 'Artistic metal sculpture inspired by Arabic heritage with modern touch'
+    },
   ];
 
   const categories = [
@@ -76,14 +108,20 @@ export const ProjectsSection = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-forge-dark via-forge-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                <div className="p-4 w-full">
+              <div className="absolute inset-0 bg-gradient-to-t from-forge-dark via-forge-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div className="p-6 w-full">
                   <h3 
-                    className="text-xl font-bold text-white"
+                    className="text-2xl font-bold text-white mb-2"
                     style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
                   >
                     {t(project.titleAr, project.titleEn)}
                   </h3>
+                  <p 
+                    className="text-sm text-gray-200"
+                    style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                  >
+                    {t(project.descriptionAr, project.descriptionEn)}
+                  </p>
                 </div>
               </div>
             </div>
