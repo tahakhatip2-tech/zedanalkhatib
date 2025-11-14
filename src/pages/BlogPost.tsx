@@ -5,22 +5,27 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Button } from '@/components/ui/button';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import traditionalBlacksmith from '@/assets/blog-traditional-blacksmith.jpg';
+import laserCutting from '@/assets/blog-laser-cutting.jpg';
+import metalMaintenance from '@/assets/blog-metal-maintenance.jpg';
+import fusionDesign from '@/assets/blog-fusion-design.jpg';
 
 const BlogPost = () => {
   const { language, t } = useLanguage();
   const { id } = useParams();
 
   // Mock blog post data - في التطبيق الحقيقي، سيتم جلب هذه البيانات من API
-  const post = {
-    id: id,
-    titleAr: 'فن الحدادة العربية التقليدية',
-    titleEn: 'The Art of Traditional Arabic Blacksmithing',
-    date: '2024-01-15',
-    author: 'فريق الخطيب',
-    authorEn: 'Al-Khatib Team',
-    image: '/placeholder.svg',
-    category: 'تراث',
-    categoryEn: 'Heritage',
+  const blogPosts: Record<string, any> = {
+    '1': {
+      id: '1',
+      titleAr: 'فن الحدادة العربية التقليدية',
+      titleEn: 'The Art of Traditional Arabic Blacksmithing',
+      date: '2024-01-15',
+      author: 'فريق الخطيب',
+      authorEn: 'Al-Khatib Team',
+      image: traditionalBlacksmith,
+      category: 'تراث',
+      categoryEn: 'Heritage',
     contentAr: `
       <p>الحدادة العربية التقليدية هي فن عريق يمتد لقرون طويلة، حيث كان الحدادون العرب يتقنون صناعة الأبواب الفخمة والأسوار المزخرفة والأدوات المعدنية المختلفة.</p>
       
@@ -39,7 +44,7 @@ const BlogPost = () => {
       <h2>الحفاظ على التراث</h2>
       <p>في ورشة الخطيب، نحرص على الحفاظ على هذه التقنيات التقليدية مع دمجها بالتكنولوجيا الحديثة، لنقدم لعملائنا أعمالاً تجمع بين الأصالة والجودة العالية.</p>
     `,
-    contentEn: `
+      contentEn: `
       <p>Traditional Arabic blacksmithing is an ancient art that spans centuries, where Arab blacksmiths mastered the creation of luxurious gates, ornate fences, and various metal tools.</p>
       
       <h2>History of Arabic Blacksmithing</h2>
@@ -57,7 +62,141 @@ const BlogPost = () => {
       <h2>Preserving Heritage</h2>
       <p>At Al-Khatib Workshop, we are committed to preserving these traditional techniques while integrating them with modern technology, to provide our customers with works that combine authenticity and high quality.</p>
     `
+    },
+    '2': {
+      id: '2',
+      titleAr: 'تقنيات القطع بالليزر الحديثة',
+      titleEn: 'Modern Laser Cutting Techniques',
+      date: '2024-01-10',
+      author: 'م. أحمد الخطيب',
+      authorEn: 'Eng. Ahmad Al-Khatib',
+      image: laserCutting,
+      category: 'تقنية',
+      categoryEn: 'Technology',
+      contentAr: `
+      <p>تقنية القطع بالليزر أحدثت ثورة في صناعة الأعمال المعدنية، حيث توفر دقة ومرونة لا مثيل لها في التصميم والتنفيذ.</p>
+      
+      <h2>ما هو القطع بالليزر؟</h2>
+      <p>القطع بالليزر هو تقنية حديثة تستخدم شعاع ليزر عالي الطاقة لقطع المواد المعدنية بدقة متناهية، مما يسمح بإنشاء تصاميم معقدة ومفصلة.</p>
+      
+      <h2>مميزات القطع بالليزر</h2>
+      <ul>
+        <li>دقة عالية في التفاصيل الدقيقة</li>
+        <li>قطع نظيف بدون حواف خشنة</li>
+        <li>إمكانية تنفيذ تصاميم معقدة</li>
+        <li>سرعة في الإنتاج</li>
+      </ul>
+      
+      <h2>استخداماتنا للقطع بالليزر</h2>
+      <p>في ورشة الخطيب، نستخدم أحدث أجهزة القطع بالليزر لإنشاء زخارف عربية تقليدية وتصاميم حديثة على حد سواء، مما يتيح لنا تقديم قطع فنية فريدة لعملائنا.</p>
+    `,
+      contentEn: `
+      <p>Laser cutting technology has revolutionized the metalwork industry, providing unparalleled precision and flexibility in design and execution.</p>
+      
+      <h2>What is Laser Cutting?</h2>
+      <p>Laser cutting is a modern technique that uses a high-energy laser beam to cut metal materials with extreme precision, allowing for the creation of complex and detailed designs.</p>
+      
+      <h2>Advantages of Laser Cutting</h2>
+      <ul>
+        <li>High precision in fine details</li>
+        <li>Clean cuts without rough edges</li>
+        <li>Ability to execute complex designs</li>
+        <li>Speed in production</li>
+      </ul>
+      
+      <h2>Our Use of Laser Cutting</h2>
+      <p>At Al-Khatib Workshop, we use the latest laser cutting equipment to create both traditional Arabic ornaments and modern designs, enabling us to deliver unique artistic pieces to our customers.</p>
+    `
+    },
+    '3': {
+      id: '3',
+      titleAr: 'نصائح للعناية بالأبواب المعدنية',
+      titleEn: 'Tips for Maintaining Metal Gates',
+      date: '2024-01-05',
+      author: 'فريق الخطيب',
+      authorEn: 'Al-Khatib Team',
+      image: metalMaintenance,
+      category: 'نصائح',
+      categoryEn: 'Tips',
+      contentAr: `
+      <p>الأبواب والأسوار المعدنية استثمار طويل الأمد، ومع العناية المناسبة، يمكن أن تحتفظ بجمالها ووظيفتها لعقود.</p>
+      
+      <h2>التنظيف المنتظم</h2>
+      <p>نظف الأبواب والأسوار بانتظام باستخدام الماء والصابون اللطيف، وتجنب استخدام المواد الكيميائية القاسية التي قد تضر بالطلاء.</p>
+      
+      <h2>الحماية من الصدأ</h2>
+      <ul>
+        <li>فحص دوري للكشف عن علامات الصدأ المبكرة</li>
+        <li>إعادة الطلاء عند الحاجة</li>
+        <li>استخدام مواد مقاومة للصدأ</li>
+      </ul>
+      
+      <h2>الصيانة الدورية</h2>
+      <p>قم بفحص المفصلات والأقفال بشكل دوري، وتأكد من تشحيمها للحفاظ على سلاسة الحركة ومنع الصدأ.</p>
+    `,
+      contentEn: `
+      <p>Metal gates and fences are a long-term investment, and with proper care, they can retain their beauty and functionality for decades.</p>
+      
+      <h2>Regular Cleaning</h2>
+      <p>Clean gates and fences regularly using water and mild soap, and avoid harsh chemicals that may damage the paint.</p>
+      
+      <h2>Rust Protection</h2>
+      <ul>
+        <li>Regular inspection to detect early signs of rust</li>
+        <li>Repainting when necessary</li>
+        <li>Using rust-resistant materials</li>
+      </ul>
+      
+      <h2>Periodic Maintenance</h2>
+      <p>Regularly inspect hinges and locks, and make sure to lubricate them to maintain smooth movement and prevent rust.</p>
+    `
+    },
+    '4': {
+      id: '4',
+      titleAr: 'الدمج بين الأصالة والحداثة',
+      titleEn: 'Blending Authenticity with Modernity',
+      date: '2024-01-01',
+      author: 'م. أحمد الخطيب',
+      authorEn: 'Eng. Ahmad Al-Khatib',
+      image: fusionDesign,
+      category: 'تصميم',
+      categoryEn: 'Design',
+      contentAr: `
+      <p>في ورشة الخطيب، نؤمن بأن التراث والحداثة ليسا متناقضين، بل يمكن أن يتكاملا لإنتاج أعمال فنية استثنائية.</p>
+      
+      <h2>فلسفتنا في التصميم</h2>
+      <p>نجمع بين جمال الزخارف العربية التقليدية وبساطة التصميم الحديث، مما ينتج عنه قطع فريدة تناسب المنازل والمباني العصرية مع الحفاظ على الطابع الأصيل.</p>
+      
+      <h2>التقنيات المستخدمة</h2>
+      <ul>
+        <li>الجمع بين الحدادة اليدوية والقطع بالليزر</li>
+        <li>استخدام مواد عصرية مع تقنيات تقليدية</li>
+        <li>تطوير تصاميم مبتكرة مستوحاة من التراث</li>
+      </ul>
+      
+      <h2>أمثلة من أعمالنا</h2>
+      <p>من الأبواب الفخمة التي تجمع بين النقوش العربية والخطوط المعاصرة، إلى الأسوار التي تدمج الأنماط الهندسية الإسلامية مع التصميم المينيمالي، نقدم حلولاً فريدة لكل عميل.</p>
+    `,
+      contentEn: `
+      <p>At Al-Khatib Workshop, we believe that heritage and modernity are not contradictory, but can complement each other to produce exceptional artistic works.</p>
+      
+      <h2>Our Design Philosophy</h2>
+      <p>We combine the beauty of traditional Arabic ornaments with the simplicity of modern design, resulting in unique pieces that suit contemporary homes and buildings while maintaining their authentic character.</p>
+      
+      <h2>Techniques Used</h2>
+      <ul>
+        <li>Combining manual blacksmithing with laser cutting</li>
+        <li>Using modern materials with traditional techniques</li>
+        <li>Developing innovative designs inspired by heritage</li>
+      </ul>
+      
+      <h2>Examples from Our Work</h2>
+      <p>From luxurious doors that combine Arabic engravings with contemporary lines, to fences that merge Islamic geometric patterns with minimalist design, we offer unique solutions for each client.</p>
+    `
+    }
   };
+
+  const post = blogPosts[id || '1'];
 
   return (
     <div className="min-h-screen bg-background">
