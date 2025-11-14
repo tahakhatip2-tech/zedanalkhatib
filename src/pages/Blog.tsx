@@ -6,6 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import traditionalBlacksmith from '@/assets/blog-traditional-blacksmith.jpg';
+import laserCutting from '@/assets/blog-laser-cutting.jpg';
+import metalMaintenance from '@/assets/blog-metal-maintenance.jpg';
+import fusionDesign from '@/assets/blog-fusion-design.jpg';
 
 const Blog = () => {
   const { language, t } = useLanguage();
@@ -20,7 +24,7 @@ const Blog = () => {
       date: '2024-01-15',
       author: 'فريق الخطيب',
       authorEn: 'Al-Khatib Team',
-      image: '/placeholder.svg',
+      image: traditionalBlacksmith,
       category: 'تراث',
       categoryEn: 'Heritage'
     },
@@ -33,7 +37,7 @@ const Blog = () => {
       date: '2024-01-10',
       author: 'م. أحمد الخطيب',
       authorEn: 'Eng. Ahmad Al-Khatib',
-      image: '/placeholder.svg',
+      image: laserCutting,
       category: 'تقنية',
       categoryEn: 'Technology'
     },
@@ -46,7 +50,7 @@ const Blog = () => {
       date: '2024-01-05',
       author: 'فريق الخطيب',
       authorEn: 'Al-Khatib Team',
-      image: '/placeholder.svg',
+      image: metalMaintenance,
       category: 'نصائح',
       categoryEn: 'Tips'
     },
@@ -59,7 +63,7 @@ const Blog = () => {
       date: '2024-01-01',
       author: 'م. أحمد الخطيب',
       authorEn: 'Eng. Ahmad Al-Khatib',
-      image: '/placeholder.svg',
+      image: fusionDesign,
       category: 'تصميم',
       categoryEn: 'Design'
     }
