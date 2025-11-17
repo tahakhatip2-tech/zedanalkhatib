@@ -9,6 +9,8 @@ import traditionalBlacksmith from '@/assets/blog-traditional-blacksmith.jpg';
 import laserCutting from '@/assets/blog-laser-cutting.jpg';
 import metalMaintenance from '@/assets/blog-metal-maintenance.jpg';
 import fusionDesign from '@/assets/blog-fusion-design.jpg';
+import metalFurniture from '@/assets/blog-metal-furniture.jpg';
+import safety from '@/assets/blog-safety.jpg';
 
 const BlogPost = () => {
   const { language, t } = useLanguage();
@@ -193,6 +195,156 @@ const BlogPost = () => {
       <h2>Examples from Our Work</h2>
       <p>From luxurious doors that combine Arabic engravings with contemporary lines, to fences that merge Islamic geometric patterns with minimalist design, we offer unique solutions for each client.</p>
     `
+    },
+    '5': {
+      id: '5',
+      titleAr: 'فن صناعة الأثاث المعدني',
+      titleEn: 'The Art of Metal Furniture Making',
+      date: '2024-01-20',
+      author: 'فريق الخطيب',
+      authorEn: 'Al-Khatib Team',
+      image: metalFurniture,
+      category: 'تصميم',
+      categoryEn: 'Design',
+      hasVideo: true,
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      contentAr: `
+      <p>الأثاث المعدني يجمع بين المتانة والجمال، ويمكن أن يكون إضافة رائعة لأي مساحة سواء داخلية أو خارجية.</p>
+      
+      <h2>الأثاث المعدني العربي التقليدي</h2>
+      <p>يتميز الأثاث المعدني العربي بالزخارف الإسلامية والأنماط الهندسية المعقدة. نستخدم تقنيات الحدادة التقليدية لإنشاء:</p>
+      <ul>
+        <li>طاولات وكراسي حدائق بتصاميم أرابيسك</li>
+        <li>أرائك معدنية مزخرفة للصالات</li>
+        <li>طاولات قهوة بنقوش إسلامية</li>
+        <li>مقاعد مزخرفة للمداخل</li>
+      </ul>
+      
+      <h2>الأثاث المعدني الأوروبي الحديث</h2>
+      <p>نقدم أيضاً تصاميم أوروبية معاصرة تتميز بالبساطة والأناقة:</p>
+      <ul>
+        <li>أثاث حدائق بخطوط نظيفة وبسيطة</li>
+        <li>طاولات طعام معدنية بتصاميم عصرية</li>
+        <li>كراسي ستانلس ستيل فاخرة</li>
+        <li>أثاث معدني للمطاعم والكافيهات</li>
+      </ul>
+      
+      <h2>المواد والجودة</h2>
+      <p>نستخدم أجود أنواع المعادن المقاومة للصدأ والعوامل الجوية، مع معالجات سطحية تضمن طول العمر والحفاظ على المظهر الجمالي.</p>
+      
+      <h2>التخصيص والتصميم</h2>
+      <p>نقدم خدمة التصميم المخصص حسب رغبة العميل، حيث يمكنك اختيار الألوان والأحجام والزخارف التي تناسب ذوقك وديكور منزلك.</p>
+    `,
+      contentEn: `
+      <p>Metal furniture combines durability with beauty and can be a wonderful addition to any space, whether indoor or outdoor.</p>
+      
+      <h2>Traditional Arabic Metal Furniture</h2>
+      <p>Arabic metal furniture is characterized by Islamic ornaments and intricate geometric patterns. We use traditional blacksmithing techniques to create:</p>
+      <ul>
+        <li>Garden tables and chairs with arabesque designs</li>
+        <li>Ornate metal sofas for living rooms</li>
+        <li>Coffee tables with Islamic engravings</li>
+        <li>Decorative benches for entryways</li>
+      </ul>
+      
+      <h2>Modern European Metal Furniture</h2>
+      <p>We also offer contemporary European designs characterized by simplicity and elegance:</p>
+      <ul>
+        <li>Garden furniture with clean, simple lines</li>
+        <li>Modern metal dining tables</li>
+        <li>Luxury stainless steel chairs</li>
+        <li>Metal furniture for restaurants and cafes</li>
+      </ul>
+      
+      <h2>Materials and Quality</h2>
+      <p>We use the finest rust-resistant and weather-resistant metals, with surface treatments that ensure longevity and maintain aesthetic appearance.</p>
+      
+      <h2>Customization and Design</h2>
+      <p>We offer custom design services according to customer preferences, where you can choose colors, sizes, and ornaments that suit your taste and home decor.</p>
+    `
+    },
+    '6': {
+      id: '6',
+      titleAr: 'السلامة في ورشة الحدادة',
+      titleEn: 'Safety in the Blacksmith Workshop',
+      date: '2024-01-18',
+      author: 'م. أحمد الخطيب',
+      authorEn: 'Eng. Ahmad Al-Khatib',
+      image: safety,
+      category: 'نصائح',
+      categoryEn: 'Tips',
+      hasVideo: true,
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      contentAr: `
+      <p>السلامة في ورشة الحدادة هي أولويتنا القصوى. نحرص على اتباع أعلى معايير السلامة لحماية عمالنا والحفاظ على بيئة عمل آمنة.</p>
+      
+      <h2>معدات الحماية الشخصية</h2>
+      <p>معدات الحماية الضرورية للعمل في ورشة الحدادة:</p>
+      <ul>
+        <li>نظارات واقية للعينين من الشرر والحرارة</li>
+        <li>قفازات حديدية مقاومة للحرارة</li>
+        <li>مريول جلدي سميك</li>
+        <li>أحذية أمان بمقدمة فولاذية</li>
+        <li>قناع لحام للأعمال التي تتطلب اللحام</li>
+        <li>واقي أذن في بيئات العمل الصاخبة</li>
+      </ul>
+      
+      <h2>إرشادات السلامة في التعامل مع الأدوات</h2>
+      <ul>
+        <li>التأكد من صيانة جميع الأدوات بشكل دوري</li>
+        <li>استخدام الأدوات المناسبة لكل مهمة</li>
+        <li>إبقاء منطقة العمل نظيفة ومنظمة</li>
+        <li>عدم ارتداء ملابس فضفاضة أو مجوهرات</li>
+        <li>التأكد من التهوية الجيدة في الورشة</li>
+      </ul>
+      
+      <h2>الوقاية من الحرائق</h2>
+      <p>نظراً لطبيعة العمل مع النار والمعادن الساخنة، يجب:</p>
+      <ul>
+        <li>وجود طفايات حريق في متناول اليد</li>
+        <li>إبعاد المواد القابلة للاشتعال عن منطقة العمل</li>
+        <li>عدم ترك النار أو المعادن الساخنة دون مراقبة</li>
+        <li>التأكد من إطفاء جميع مصادر الحرارة بعد الانتهاء</li>
+      </ul>
+      
+      <h2>التدريب المستمر</h2>
+      <p>في ورشة الخطيب، نحرص على تدريب جميع العاملين على إجراءات السلامة والإسعافات الأولية، ونجري تدريبات دورية للتعامل مع حالات الطوارئ.</p>
+    `,
+      contentEn: `
+      <p>Safety in the blacksmith workshop is our top priority. We ensure compliance with the highest safety standards to protect our workers and maintain a safe work environment.</p>
+      
+      <h2>Personal Protective Equipment</h2>
+      <p>Essential protective equipment for working in a blacksmith workshop:</p>
+      <ul>
+        <li>Safety goggles to protect eyes from sparks and heat</li>
+        <li>Heat-resistant metal gloves</li>
+        <li>Thick leather apron</li>
+        <li>Safety shoes with steel toe caps</li>
+        <li>Welding mask for welding tasks</li>
+        <li>Ear protection in noisy work environments</li>
+      </ul>
+      
+      <h2>Safety Guidelines for Tool Handling</h2>
+      <ul>
+        <li>Ensure all tools are regularly maintained</li>
+        <li>Use appropriate tools for each task</li>
+        <li>Keep work area clean and organized</li>
+        <li>Do not wear loose clothing or jewelry</li>
+        <li>Ensure good ventilation in the workshop</li>
+      </ul>
+      
+      <h2>Fire Prevention</h2>
+      <p>Due to the nature of working with fire and hot metals, it's essential to:</p>
+      <ul>
+        <li>Have fire extinguishers within reach</li>
+        <li>Keep flammable materials away from work area</li>
+        <li>Never leave fire or hot metals unattended</li>
+        <li>Ensure all heat sources are extinguished after completion</li>
+      </ul>
+      
+      <h2>Continuous Training</h2>
+      <p>At Al-Khatib Workshop, we ensure all workers are trained in safety procedures and first aid, and we conduct regular emergency response drills.</p>
+    `
     }
   };
 
@@ -252,7 +404,25 @@ const BlogPost = () => {
               </Button>
             </Link>
 
-            <article 
+            {/* Video Section */}
+            {post.hasVideo && post.videoUrl && (
+              <div className="mb-12 rounded-lg overflow-hidden border-2 border-border shadow-fire-glow">
+                <div className="aspect-video">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={post.videoUrl}
+                    title={t(post.titleAr, post.titleEn)}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
+              </div>
+            )}
+
+            <article
               className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-ul:text-muted-foreground"
               style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
               dangerouslySetInnerHTML={{ __html: t(post.contentAr, post.contentEn) }}
