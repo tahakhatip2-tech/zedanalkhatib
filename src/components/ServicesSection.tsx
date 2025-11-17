@@ -1,10 +1,11 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card } from './ui/card';
-import { Hammer, Sparkles, PenTool, Zap } from 'lucide-react';
+import { Hammer, Sparkles, PenTool, Zap, Armchair } from 'lucide-react';
 import arabicGate from '@/assets/arabic-gate.jpg';
 import modernMetal from '@/assets/modern-metal.jpg';
 import laserWork from '@/assets/laser-work.jpg';
 import metalArt from '@/assets/metal-art.jpg';
+import metalFurniture from '@/assets/metal-furniture.jpg';
 import heroServices from '@/assets/hero-services.jpg';
 import { Button } from './ui/button';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
@@ -44,6 +45,14 @@ export const ServicesSection = () => {
       descAr: 'تصاميم زخرفية فنية ونقوش مخصصة على المعادن',
       descEn: 'Artistic ornamental designs and custom engravings on metal',
       image: metalArt,
+    },
+    {
+      icon: Armchair,
+      titleAr: 'الأثاث المعدني العربي والأفرنجي',
+      titleEn: 'Arabic & European Metal Furniture',
+      descAr: 'طاولات وكراسي وأرائك معدنية فاخرة بتصاميم عربية تقليدية وأوروبية حديثة',
+      descEn: 'Luxurious metal tables, chairs and sofas in traditional Arabic and modern European designs',
+      image: metalFurniture,
     },
   ];
 
@@ -92,7 +101,7 @@ export const ServicesSection = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {services.map((service, index) => (
             <Card 
               key={index}

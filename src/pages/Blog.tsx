@@ -10,6 +10,8 @@ import traditionalBlacksmith from '@/assets/blog-traditional-blacksmith.jpg';
 import laserCutting from '@/assets/blog-laser-cutting.jpg';
 import metalMaintenance from '@/assets/blog-metal-maintenance.jpg';
 import fusionDesign from '@/assets/blog-fusion-design.jpg';
+import metalFurniture from '@/assets/blog-metal-furniture.jpg';
+import safety from '@/assets/blog-safety.jpg';
 import heroBlog from '@/assets/hero-blog.jpg';
 
 const Blog = () => {
@@ -71,6 +73,34 @@ const Blog = () => {
       image: fusionDesign,
       category: 'تصميم',
       categoryEn: 'Design'
+    },
+    {
+      id: 5,
+      titleAr: 'فن صناعة الأثاث المعدني',
+      titleEn: 'The Art of Metal Furniture Making',
+      excerptAr: 'اكتشف كيف نصنع الأثاث المعدني الفاخر بتصاميم عربية وأوروبية مذهلة',
+      excerptEn: 'Discover how we craft luxurious metal furniture with stunning Arabic and European designs',
+      date: '2024-01-20',
+      author: 'فريق الخطيب',
+      authorEn: 'Al-Khatib Team',
+      image: metalFurniture,
+      category: 'تصميم',
+      categoryEn: 'Design',
+      hasVideo: true
+    },
+    {
+      id: 6,
+      titleAr: 'السلامة في ورشة الحدادة',
+      titleEn: 'Safety in the Blacksmith Workshop',
+      excerptAr: 'نصائح وإرشادات مهمة للحفاظ على السلامة أثناء العمل في ورشة الحدادة',
+      excerptEn: 'Important tips and guidelines for maintaining safety while working in a blacksmith workshop',
+      date: '2024-01-18',
+      author: 'م. أحمد الخطيب',
+      authorEn: 'Eng. Ahmad Al-Khatib',
+      image: safety,
+      category: 'نصائح',
+      categoryEn: 'Tips',
+      hasVideo: true
     }
   ];
 
@@ -155,6 +185,14 @@ const Blog = () => {
                     >
                       {t(post.category, post.categoryEn)}
                     </span>
+                    {post.hasVideo && (
+                      <span className="px-3 py-1 rounded-full text-sm font-bold bg-primary text-primary-foreground flex items-center gap-1">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
+                        </svg>
+                        {t('فيديو', 'Video')}
+                      </span>
+                    )}
                   </div>
                 </div>
                 
