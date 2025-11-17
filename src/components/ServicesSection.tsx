@@ -5,6 +5,9 @@ import arabicGate from '@/assets/arabic-gate.jpg';
 import modernMetal from '@/assets/modern-metal.jpg';
 import laserWork from '@/assets/laser-work.jpg';
 import metalArt from '@/assets/metal-art.jpg';
+import heroServices from '@/assets/hero-services.jpg';
+import { Button } from './ui/button';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 export const ServicesSection = () => {
   const { language, t } = useLanguage();
@@ -45,17 +48,27 @@ export const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="services" className="relative py-20 overflow-hidden">
+      {/* Hero Background */}
+      <div className="absolute inset-0 opacity-10">
+        <img 
+          src={heroServices} 
+          alt="Services"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-slide-up">
           <h2 
-            className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-fire-gradient mb-4"
+            className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-fire-gradient mb-6"
             style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
           >
             {t('خدماتنا', 'Our Services')}
           </h2>
           <p 
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8"
             style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
           >
             {t(
@@ -63,6 +76,20 @@ export const ServicesSection = () => {
               'We offer a comprehensive range of blacksmithing and artistic metalwork services'
             )}
           </p>
+          
+          <Button 
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            size="lg"
+            className="group bg-fire-gradient hover:shadow-fire-glow transition-all duration-300 text-forge-dark font-bold animate-scale-in"
+            style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+          >
+            {t('احجز خدمتك الآن', 'Book Your Service Now')}
+            {language === 'ar' ? (
+              <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform" />
+            ) : (
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            )}
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

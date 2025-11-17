@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import heroContact from '@/assets/hero-contact.jpg';
 
 export const ContactSection = () => {
   const { language, t } = useLanguage();
@@ -13,17 +14,27 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+    <section id="contact" className="relative py-20 overflow-hidden">
+      {/* Hero Background */}
+      <div className="absolute inset-0 opacity-15">
+        <img 
+          src={heroContact} 
+          alt="Contact"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-12 animate-slide-up">
           <h2 
-            className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-fire-gradient mb-4"
+            className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-fire-gradient mb-6"
             style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
           >
             {t('تواصل معنا', 'Contact Us')}
           </h2>
           <p 
-            className="text-lg text-muted-foreground"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
             style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
           >
             {t('نحن هنا لمساعدتك في تحقيق رؤيتك', "We're here to help bring your vision to life")}
@@ -145,10 +156,11 @@ export const ContactSection = () => {
             <Button 
               type="submit"
               size="lg"
-              className="w-full bg-fire-gradient hover:shadow-fire-glow text-forge-dark font-bold"
+              className="w-full bg-fire-gradient hover:shadow-fire-glow transition-all duration-300 text-forge-dark font-bold group"
               style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
             >
               {t('إرسال الرسالة', 'Send Message')}
+              <Mail className="inline-block mr-2 ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
             </Button>
           </form>
         </div>
