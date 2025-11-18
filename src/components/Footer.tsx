@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Phone, MapPin, Clock, Code } from 'lucide-react';
 
 export const Footer = () => {
@@ -60,21 +61,42 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-3">
               {[
-                { link: '/', label: t('الرئيسية', 'Home') },
-                { link: '/#services', label: t('الخدمات', 'Services') },
-                { link: '/#projects', label: t('المشاريع', 'Projects') },
-                { link: '/blog', label: t('المدونة', 'Blog') },
-                { link: '/#contact', label: t('تواصل معنا', 'Contact Us') }
+                { link: '/', label: t('الرئيسية', 'Home'), isRoute: true },
+                { link: '/#services', label: t('الخدمات', 'Services'), isRoute: false },
+                { link: '/portfolio', label: t('معرض الأعمال', 'Portfolio'), isRoute: true },
+                { link: '/blog', label: t('المدونة', 'Blog'), isRoute: true },
+                { link: '/#contact', label: t('تواصل معنا', 'Contact Us'), isRoute: false }
               ].map((item, index) => (
                 <li key={index} className="group">
-                  <a 
-                    href={item.link}
-                    className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2 hover:translate-x-2 rtl:hover:-translate-x-2"
-                    style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
-                  >
-                    <span className="w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {item.label}
-                  </a>
+                  {item.isRoute ? (
+                    <Link
+                      to={item.link}
+                      className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2 hover:translate-x-2 rtl:hover:-translate-x-2"
+                      style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                    >
+                      <span className="w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <a 
+                      href={item.link}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const targetId = item.link.replace('/#', '');
+                        const element = document.getElementById(targetId);
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                          window.location.href = item.link;
+                        }
+                      }}
+                      className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2 hover:translate-x-2 rtl:hover:-translate-x-2 cursor-pointer"
+                      style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                    >
+                      <span className="w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                      {item.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
