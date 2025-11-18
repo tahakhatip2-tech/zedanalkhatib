@@ -14,6 +14,7 @@ export const Navigation = () => {
     { ar: 'الرئيسية', en: 'Home', href: '/', isRoute: true },
     { ar: 'الخدمات', en: 'Services', href: '#services', isRoute: false },
     { ar: 'المشاريع', en: 'Projects', href: '#projects', isRoute: false },
+    { ar: 'معرض الأعمال', en: 'Portfolio', href: '/portfolio', isRoute: true },
     { ar: 'المدونة', en: 'Blog', href: '/blog', isRoute: true },
     { ar: 'تواصل معنا', en: 'Contact', href: '#contact', isRoute: false },
   ];
