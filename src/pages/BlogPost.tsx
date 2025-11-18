@@ -3,7 +3,8 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Button } from '@/components/ui/button';
-import { Calendar, User, ArrowLeft } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Calendar, User, ArrowLeft, Share2, Facebook, Twitter, Linkedin, MessageCircle } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import traditionalBlacksmith from '@/assets/blog-traditional-blacksmith.jpg';
 import laserCutting from '@/assets/blog-laser-cutting.jpg';
@@ -350,6 +351,29 @@ const BlogPost = () => {
 
   const post = blogPosts[id || '1'];
 
+  // Get suggested posts (exclude current post)
+  const suggestedPosts = Object.values(blogPosts)
+    .filter((p: any) => p.id !== id)
+    .slice(0, 3);
+
+  // Share functionality
+  const shareUrl = window.location.href;
+  const shareTitle = t(post.titleAr, post.titleEn);
+
+  const handleShare = (platform: string) => {
+    const encodedUrl = encodeURIComponent(shareUrl);
+    const encodedTitle = encodeURIComponent(shareTitle);
+    
+    const urls: Record<string, string> = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+      whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`
+    };
+
+    window.open(urls[platform], '_blank', 'width=600,height=400');
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -427,6 +451,101 @@ const BlogPost = () => {
               style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
               dangerouslySetInnerHTML={{ __html: t(post.contentAr, post.contentEn) }}
             />
+
+            {/* Share Buttons */}
+            <div className="mt-12 pt-8 border-t-2 border-border">
+              <h3 
+                className="text-xl font-bold mb-4 flex items-center gap-2"
+                style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+              >
+                <Share2 className="w-5 h-5" />
+                {t('شارك المقال', 'Share Article')}
+              </h3>
+              <div className="flex gap-3 flex-wrap">
+                <Button
+                  onClick={() => handleShare('facebook')}
+                  variant="outline"
+                  className="border-2 hover:bg-[#1877f2] hover:text-white hover:border-[#1877f2] transition-colors"
+                >
+                  <Facebook className="w-5 h-5 mr-2" />
+                  Facebook
+                </Button>
+                <Button
+                  onClick={() => handleShare('twitter')}
+                  variant="outline"
+                  className="border-2 hover:bg-[#1da1f2] hover:text-white hover:border-[#1da1f2] transition-colors"
+                >
+                  <Twitter className="w-5 h-5 mr-2" />
+                  Twitter
+                </Button>
+                <Button
+                  onClick={() => handleShare('linkedin')}
+                  variant="outline"
+                  className="border-2 hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5] transition-colors"
+                >
+                  <Linkedin className="w-5 h-5 mr-2" />
+                  LinkedIn
+                </Button>
+                <Button
+                  onClick={() => handleShare('whatsapp')}
+                  variant="outline"
+                  className="border-2 hover:bg-[#25d366] hover:text-white hover:border-[#25d366] transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  WhatsApp
+                </Button>
+              </div>
+            </div>
+
+            {/* Suggested Posts */}
+            <div className="mt-16">
+              <h3 
+                className="text-3xl font-bold mb-8 text-center"
+                style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+              >
+                {t('مقالات ذات صلة', 'Related Articles')}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {suggestedPosts.map((suggestedPost: any, index: number) => (
+                  <Link key={suggestedPost.id} to={`/blog/${suggestedPost.id}`}>
+                    <Card 
+                      className="group overflow-hidden border-2 border-border hover:border-primary transition-all duration-300 hover:shadow-fire-glow cursor-pointer h-full animate-slide-up"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <div className="aspect-video overflow-hidden relative">
+                        <img 
+                          src={suggestedPost.image} 
+                          alt={t(suggestedPost.titleAr, suggestedPost.titleEn)}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        {suggestedPost.hasVideo && (
+                          <div className="absolute top-3 right-3 bg-fire-gradient text-forge-dark px-2 py-1 rounded-full text-xs font-bold">
+                            📹 {t('فيديو', 'Video')}
+                          </div>
+                        )}
+                        <span className="absolute bottom-3 left-3 px-3 py-1 text-xs font-bold bg-fire-gradient text-forge-dark rounded-full">
+                          {t(suggestedPost.category, suggestedPost.categoryEn)}
+                        </span>
+                      </div>
+                      
+                      <CardContent className="p-4 space-y-2">
+                        <h4 
+                          className="text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2"
+                          style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                        >
+                          {t(suggestedPost.titleAr, suggestedPost.titleEn)}
+                        </h4>
+                        
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Calendar className="w-3 h-3" />
+                          {suggestedPost.date}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </div>
 
             {/* Call to Action */}
             <div className="mt-16 p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border-2 border-border text-center">
