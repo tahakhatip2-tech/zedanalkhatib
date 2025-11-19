@@ -60,7 +60,13 @@ export const Navigation = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     const targetId = item.href.replace('#', '');
-                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+                    const element = document.getElementById(targetId);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    } else if (location.pathname !== '/') {
+                      // If not on home page, navigate to home then scroll
+                      window.location.href = '/' + item.href;
+                    }
                   }}
                   className="text-foreground hover:text-primary transition-colors duration-300 font-medium cursor-pointer relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-fire-gradient hover:after:w-full after:transition-all after:duration-300"
                   style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
@@ -127,7 +133,13 @@ export const Navigation = () => {
                     setIsOpen(false);
                     const targetId = item.href.replace('#', '');
                     setTimeout(() => {
-                      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+                      const element = document.getElementById(targetId);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      } else if (location.pathname !== '/') {
+                        // If not on home page, navigate to home then scroll
+                        window.location.href = '/' + item.href;
+                      }
                     }, 100);
                   }}
                   className="block py-3 px-4 text-foreground hover:bg-muted hover:text-primary rounded-lg transition-all cursor-pointer font-medium"
