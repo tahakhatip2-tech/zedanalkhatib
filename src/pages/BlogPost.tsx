@@ -2,6 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, User, ArrowLeft, Share2, Facebook, Twitter, Linkedin, MessageCircle } from 'lucide-react';
@@ -377,6 +378,19 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      
+      {/* Breadcrumbs */}
+      <div className="container mx-auto px-4 pt-24 pb-4">
+        <Breadcrumbs 
+          items={[
+            { labelAr: 'المدونة', labelEn: 'Blog', path: '/blog' },
+            { 
+              labelAr: language === 'ar' ? post.titleAr : post.titleEn,
+              labelEn: language === 'ar' ? post.titleAr : post.titleEn
+            }
+          ]}
+        />
+      </div>
       
       {/* Hero Section with Featured Image */}
       <section className="relative h-[50vh] overflow-hidden">
