@@ -2,6 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, User, ArrowRight, ArrowLeft } from 'lucide-react';
@@ -117,6 +118,10 @@ const Blog = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-forge-dark/80 via-forge-dark/60 to-background"></div>
+        </div>
+        
+        <div className="absolute top-24 left-0 right-0 px-6 md:px-12 z-20">
+          <Breadcrumbs className="bg-background/80 backdrop-blur-sm p-3 rounded-lg w-fit" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10 h-full flex items-center justify-center">
