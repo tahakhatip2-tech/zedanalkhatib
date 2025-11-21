@@ -4,9 +4,10 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ProjectModal } from '@/components/ProjectModal';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ChevronDown, Search } from 'lucide-react';
+import { ChevronDown, Search, Star } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import heroPortfolio from '@/assets/hero-portfolio.jpg';
 import arabicGate from '@/assets/arabic-gate.jpg';
@@ -19,73 +20,111 @@ export default function Portfolio() {
   const { language, t } = useLanguage();
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const projects = [
     { 
       id: 1, 
-      image: arabicGate, 
+      images: [arabicGate, metalArt, modernMetal], 
       category: 'arabic', 
       titleAr: 'بوابة عربية فاخرة', 
       titleEn: 'Luxury Arabic Gate',
-      descriptionAr: 'بوابة معدنية عربية فاخرة بتصميم تقليدي مع نقوش إسلامية معقدة',
-      descriptionEn: 'Luxury Arabic metal gate with traditional design and intricate Islamic patterns',
+      descriptionAr: 'بوابة معدنية عربية فاخرة بتصميم تقليدي مع نقوش إسلامية معقدة. تم تنفيذها بأعلى معايير الجودة باستخدام أجود أنواع الحديد مع تطبيق طبقة حماية ضد الصدأ',
+      descriptionEn: 'Luxury Arabic metal gate with traditional design and intricate Islamic patterns. Executed to the highest quality standards using the finest types of iron with anti-rust protection',
       year: '2024',
-      location: 'عمان'
+      location: 'عمان',
+      rating: 5,
+      specifications: {
+        ar: ['حديد مجلفن عالي الجودة', 'نقوش إسلامية يدوية', 'طلاء مقاوم للصدأ', 'أبعاد: 4م × 2.5م', 'ضمان 10 سنوات'],
+        en: ['High-quality galvanized iron', 'Handmade Islamic engravings', 'Rust-resistant coating', 'Dimensions: 4m × 2.5m', '10-year warranty']
+      },
+      pricePerMeter: '120-180'
     },
     { 
       id: 2, 
-      image: modernMetal, 
+      images: [modernMetal, laserWork, arabicGate], 
       category: 'modern', 
       titleAr: 'درابزين حديث', 
       titleEn: 'Modern Railing',
-      descriptionAr: 'درابزين من الفولاذ المقاوم للصدأ بتصميم عصري وأنيق',
-      descriptionEn: 'Modern stainless steel railing with contemporary elegant design',
+      descriptionAr: 'درابزين من الفولاذ المقاوم للصدأ بتصميم عصري وأنيق. يتميز بالمتانة العالية والمظهر الجمالي الراقي',
+      descriptionEn: 'Modern stainless steel railing with contemporary elegant design. Features high durability and sophisticated aesthetic appearance',
       year: '2024',
-      location: 'أبو علندا'
+      location: 'أبو علندا',
+      rating: 5,
+      specifications: {
+        ar: ['فولاذ مقاوم للصدأ 316', 'تصميم بسيط وعصري', 'لحام غير مرئي', 'طول: 15 متر', 'صيانة منخفضة'],
+        en: ['Stainless steel 316', 'Simple modern design', 'Invisible welding', 'Length: 15 meters', 'Low maintenance']
+      },
+      pricePerMeter: '90-140'
     },
     { 
       id: 3, 
-      image: laserWork, 
+      images: [laserWork, metalArt, modernMetal], 
       category: 'laser', 
       titleAr: 'نقش بالليزر', 
       titleEn: 'Laser Engraving',
-      descriptionAr: 'نقش دقيق بالليزر على المعدن بتصاميم هندسية معاصرة',
-      descriptionEn: 'Precision laser engraving on metal with contemporary geometric designs',
+      descriptionAr: 'نقش دقيق بالليزر على المعدن بتصاميم هندسية معاصرة. تقنية متقدمة تضمن دقة عالية في التفاصيل',
+      descriptionEn: 'Precision laser engraving on metal with contemporary geometric designs. Advanced technology ensures high accuracy in details',
       year: '2024',
-      location: 'عمان'
+      location: 'عمان',
+      rating: 4,
+      specifications: {
+        ar: ['قطع ليزر بدقة 0.1 ملم', 'تصاميم مخصصة', 'معالجة CNC', 'سماكة المعدن: 3-12 ملم', 'تشطيب ناعم'],
+        en: ['Laser cutting accuracy 0.1mm', 'Custom designs', 'CNC processing', 'Metal thickness: 3-12mm', 'Smooth finishing']
+      },
+      pricePerMeter: '150-250'
     },
     { 
       id: 4, 
-      image: metalArt, 
+      images: [metalArt, arabicGate, laserWork], 
       category: 'art', 
       titleAr: 'منحوتة معدنية', 
       titleEn: 'Metal Sculpture',
-      descriptionAr: 'عمل فني معدني مستوحى من التراث العربي بلمسة حديثة',
-      descriptionEn: 'Artistic metal sculpture inspired by Arabic heritage with modern touch',
+      descriptionAr: 'عمل فني معدني مستوحى من التراث العربي بلمسة حديثة. قطعة فنية فريدة تجمع بين الأصالة والمعاصرة',
+      descriptionEn: 'Artistic metal sculpture inspired by Arabic heritage with modern touch. A unique piece combining authenticity and contemporary style',
       year: '2023',
-      location: 'عمان'
+      location: 'عمان',
+      rating: 5,
+      specifications: {
+        ar: ['عمل يدوي 100%', 'تصميم فريد', 'معالجة حرارية خاصة', 'ارتفاع: 2 متر', 'قطعة واحدة غير متكررة'],
+        en: ['100% handmade', 'Unique design', 'Special heat treatment', 'Height: 2 meters', 'One-of-a-kind piece']
+      },
+      pricePerMeter: 'حسب التصميم'
     },
     { 
       id: 5, 
-      image: metalFurniture, 
+      images: [metalFurniture, modernMetal, arabicGate], 
       category: 'furniture', 
       titleAr: 'أثاث معدني فاخر', 
       titleEn: 'Luxury Metal Furniture',
-      descriptionAr: 'أثاث معدني عربي وأفرنجي بتصميم راقي وتنفيذ متقن',
-      descriptionEn: 'Arabic and European metal furniture with elegant design and precise execution',
+      descriptionAr: 'أثاث معدني عربي وأفرنجي بتصميم راقي وتنفيذ متقن. مثالي للمنازل والفلل الفاخرة',
+      descriptionEn: 'Arabic and European metal furniture with elegant design and precise execution. Perfect for luxury homes and villas',
       year: '2024',
-      location: 'عمان'
+      location: 'عمان',
+      rating: 5,
+      specifications: {
+        ar: ['حديد مشغول يدوياً', 'تصميمات حسب الطلب', 'طلاء إلكتروستاتيك', 'خيارات ألوان متعددة', 'ضمان 5 سنوات'],
+        en: ['Handcrafted iron', 'Custom designs', 'Electrostatic coating', 'Multiple color options', '5-year warranty']
+      },
+      pricePerMeter: '100-160'
     },
     { 
       id: 6, 
-      image: arabicGate, 
+      images: [arabicGate, metalFurniture, laserWork], 
       category: 'arabic', 
       titleAr: 'سور حديدي زخرفي', 
       titleEn: 'Decorative Iron Fence',
-      descriptionAr: 'سور حديدي بزخارف عربية تقليدية وتفاصيل دقيقة',
-      descriptionEn: 'Iron fence with traditional Arabic decorations and fine details',
+      descriptionAr: 'سور حديدي بزخارف عربية تقليدية وتفاصيل دقيقة. يوفر الأمان والجمال في آن واحد',
+      descriptionEn: 'Iron fence with traditional Arabic decorations and fine details. Provides both security and beauty',
       year: '2023',
-      location: 'أبو علندا'
+      location: 'أبو علندا',
+      rating: 4,
+      specifications: {
+        ar: ['حديد قوي 16 ملم', 'زخارف عربية أصيلة', 'تركيب متين', 'طول: 50 متر', 'ارتفاع: 2 متر'],
+        en: ['Heavy-duty 16mm iron', 'Authentic Arabic decorations', 'Solid installation', 'Length: 50 meters', 'Height: 2 meters']
+      },
+      pricePerMeter: '80-120'
     },
   ];
 
@@ -207,17 +246,31 @@ export default function Portfolio() {
             {filteredProjects.map((project, index) => (
               <Card 
                 key={project.id}
+                onClick={() => {
+                  setSelectedProject(project);
+                  setIsModalOpen(true);
+                }}
                 className="group overflow-hidden border-2 border-border hover:border-primary transition-all duration-300 hover:shadow-fire-glow cursor-pointer animate-slide-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="aspect-square overflow-hidden relative">
                   <img 
-                    src={project.image} 
+                    src={project.images[0]} 
                     alt={t(project.titleAr, project.titleEn)}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-4 right-4 bg-fire-gradient text-forge-dark px-3 py-1 rounded-full font-bold text-sm">
                     {project.year}
+                  </div>
+                  <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-3 w-3 ${
+                          i < project.rating ? 'fill-primary text-primary' : 'fill-muted text-muted'
+                        }`}
+                      />
+                    ))}
                   </div>
                 </div>
                 
@@ -277,6 +330,15 @@ export default function Portfolio() {
 
       <Footer />
       <WhatsAppButton />
+      
+      {/* Project Modal */}
+      {selectedProject && (
+        <ProjectModal
+          open={isModalOpen}
+          onOpenChange={setIsModalOpen}
+          project={selectedProject}
+        />
+      )}
     </div>
   );
 }
