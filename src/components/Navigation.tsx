@@ -3,21 +3,36 @@ import { Menu, X, Globe, Moon, Sun } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from './ui/button';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { language, toggleLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     { ar: 'الرئيسية', en: 'Home', href: '/', isRoute: true },
     { ar: 'الخدمات', en: 'Services', href: '#services', isRoute: false },
     { ar: 'معرض الأعمال', en: 'Portfolio', href: '/portfolio', isRoute: true },
     { ar: 'المدونة', en: 'Blog', href: '/blog', isRoute: true },
+    { ar: 'احجز موعد', en: 'Book Now', href: '/booking', isRoute: true },
     { ar: 'تواصل معنا', en: 'Contact', href: '#contact', isRoute: false },
   ];
+
+  const handleSectionNavigation = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      // If not on home page, navigate to home with hash
+      navigate('/', { state: { scrollTo: sectionId } });
+    } else {
+      // If on home page, scroll directly
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-md border-b border-border z-50 shadow-fire-glow-sm">
@@ -54,25 +69,14 @@ export const Navigation = () => {
                   {t(item.ar, item.en)}
                 </Link>
               ) : (
-                <a
+                <button
                   key={item.href}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const targetId = item.href.replace('#', '');
-                    const element = document.getElementById(targetId);
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    } else if (location.pathname !== '/') {
-                      // If not on home page, navigate to home then scroll
-                      window.location.href = '/' + item.href;
-                    }
-                  }}
+                  onClick={() => handleSectionNavigation(item.href.replace('#', ''))}
                   className="text-foreground hover:text-primary transition-colors duration-300 font-medium cursor-pointer relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-fire-gradient hover:after:w-full after:transition-all after:duration-300"
                   style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
                 >
                   {t(item.ar, item.en)}
-                </a>
+                </button>
               );
             })}
           </div>
@@ -125,28 +129,17 @@ export const Navigation = () => {
                   {t(item.ar, item.en)}
                 </Link>
               ) : (
-                <a
+                <button
                   key={item.href}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={() => {
                     setIsOpen(false);
-                    const targetId = item.href.replace('#', '');
-                    setTimeout(() => {
-                      const element = document.getElementById(targetId);
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      } else if (location.pathname !== '/') {
-                        // If not on home page, navigate to home then scroll
-                        window.location.href = '/' + item.href;
-                      }
-                    }, 100);
+                    setTimeout(() => handleSectionNavigation(item.href.replace('#', '')), 100);
                   }}
-                  className="block py-3 px-4 text-foreground hover:bg-muted hover:text-primary rounded-lg transition-all cursor-pointer font-medium"
+                  className="block w-full text-right py-3 px-4 text-foreground hover:bg-muted hover:text-primary rounded-lg transition-all cursor-pointer font-medium"
                   style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
                 >
                   {t(item.ar, item.en)}
-                </a>
+                </button>
               );
             })}
           </div>
