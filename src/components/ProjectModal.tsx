@@ -17,29 +17,33 @@ import { Separator } from '@/components/ui/separator';
 import { Star, MapPin, Calendar, Ruler, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+interface Project {
+  id: number;
+  images: string[];
+  category: string;
+  titleAr: string;
+  titleEn: string;
+  descriptionAr: string;
+  descriptionEn: string;
+  year: string;
+  location: string;
+  rating: number;
+  specifications: {
+    ar: string[];
+    en: string[];
+  };
+  pricePerMeter: string;
+}
+
 interface ProjectModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  project: {
-    id: number;
-    images: string[];
-    category: string;
-    titleAr: string;
-    titleEn: string;
-    descriptionAr: string;
-    descriptionEn: string;
-    year: string;
-    location: string;
-    rating: number;
-    specifications: {
-      ar: string[];
-      en: string[];
-    };
-    pricePerMeter: string;
-  };
+  project: Project;
+  allProjects: Project[];
+  onProjectSelect: (project: Project) => void;
 }
 
-export const ProjectModal = ({ open, onOpenChange, project }: ProjectModalProps) => {
+export const ProjectModal = ({ open, onOpenChange, project, allProjects, onProjectSelect }: ProjectModalProps) => {
   const { language, t } = useLanguage();
 
   const categoryMap: Record<string, { ar: string; en: string }> = {
@@ -49,6 +53,11 @@ export const ProjectModal = ({ open, onOpenChange, project }: ProjectModalProps)
     art: { ar: 'فني', en: 'Artistic' },
     furniture: { ar: 'أثاث', en: 'Furniture' },
   };
+
+  // Get related projects (same category, excluding current project)
+  const relatedProjects = allProjects
+    .filter(p => p.category === project.category && p.id !== project.id)
+    .slice(0, 3);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -213,6 +222,59 @@ export const ProjectModal = ({ open, onOpenChange, project }: ProjectModalProps)
             <DollarSign className={`h-5 w-5 ${language === 'ar' ? 'ml-2' : 'mr-2'}`} />
             {t('استفسر عن السعر', 'Inquire About Price')}
           </Button>
+
+          {/* Related Projects Section */}
+          {relatedProjects.length > 0 && (
+            <>
+              <Separator />
+              <div>
+                <h3
+                  className="text-xl font-bold text-foreground mb-4"
+                  style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                >
+                  {t('مشاريع مشابهة', 'Related Projects')}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {relatedProjects.map((relatedProject) => (
+                    <div
+                      key={relatedProject.id}
+                      onClick={() => onProjectSelect(relatedProject)}
+                      className="group cursor-pointer rounded-lg overflow-hidden border-2 border-border hover:border-primary transition-all duration-300 hover:shadow-fire-glow-sm"
+                    >
+                      <div className="aspect-square overflow-hidden relative">
+                        <img
+                          src={relatedProject.images[0]}
+                          alt={t(relatedProject.titleAr, relatedProject.titleEn)}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-forge-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                      <div className="p-3 bg-muted/50">
+                        <h4
+                          className="font-bold text-sm text-foreground group-hover:text-primary transition-colors line-clamp-1"
+                          style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
+                        >
+                          {t(relatedProject.titleAr, relatedProject.titleEn)}
+                        </h4>
+                        <div className="flex items-center gap-1 mt-1">
+                          {Array.from({ length: 5 }, (_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-3 w-3 ${
+                                i < relatedProject.rating
+                                  ? 'fill-primary text-primary'
+                                  : 'fill-muted text-muted'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </DialogContent>
     </Dialog>
