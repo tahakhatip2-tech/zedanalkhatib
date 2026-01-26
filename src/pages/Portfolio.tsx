@@ -337,6 +337,8 @@ export default function Portfolio() {
           open={isModalOpen}
           onOpenChange={setIsModalOpen}
           project={selectedProject}
+          allProjects={projects}
+          onProjectSelect={(project) => setSelectedProject(project)}
         />
       )}
     </div>
