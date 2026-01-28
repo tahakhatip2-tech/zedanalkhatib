@@ -15,6 +15,7 @@ export const Navigation = () => {
   const navItems = [
     { ar: 'الرئيسية', en: 'Home', href: '/', isRoute: true },
     { ar: 'الخدمات', en: 'Services', href: '#services', isRoute: false },
+    { ar: 'الخبير', en: 'Expert', href: '#expert', isRoute: false },
     { ar: 'معرض الأعمال', en: 'Portfolio', href: '/portfolio', isRoute: true },
     { ar: 'المدونة', en: 'Blog', href: '/blog', isRoute: true },
     { ar: 'احجز موعد', en: 'Book Now', href: '/booking', isRoute: true },
@@ -39,15 +40,20 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo with Link to Home */}
-          <Link to="/" className="flex items-center space-x-2 rtl:space-x-reverse hover:opacity-90 transition-opacity">
-            <div className="w-10 h-10 rounded-full bg-fire-gradient flex items-center justify-center shadow-fire-glow-sm">
-              <span className="text-2xl font-bold text-forge-dark">خ</span>
+          <Link to="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+            <div className="relative">
+              <img
+                src="/logo.png"
+                alt="Al-Khatib Logo"
+                className="w-12 h-12 object-contain shadow-fire-glow-sm rounded-lg"
+              />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse blur-[1px]" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-foreground" style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}>
+              <span className="font-black text-xl tracking-tight text-white leading-none" style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}>
                 {t('الخطيب', 'Al-Khatib')}
               </span>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-primary/80 mt-1">
                 {t('للحدادة العامة', 'Blacksmithing')}
               </span>
             </div>
@@ -61,9 +67,8 @@ export const Navigation = () => {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`text-foreground hover:text-primary transition-colors duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-fire-gradient after:transition-all after:duration-300 ${
-                    isActive ? 'text-primary after:w-full' : 'after:w-0 hover:after:w-full'
-                  }`}
+                  className={`text-foreground hover:text-primary transition-colors duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-fire-gradient after:transition-all after:duration-300 ${isActive ? 'text-primary after:w-full' : 'after:w-0 hover:after:w-full'
+                    }`}
                   style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
                 >
                   {t(item.ar, item.en)}
@@ -121,9 +126,8 @@ export const Navigation = () => {
                   key={item.href}
                   to={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block py-3 px-4 hover:bg-muted hover:text-primary rounded-lg transition-all font-medium ${
-                    isActive ? 'bg-muted text-primary' : 'text-foreground'
-                  }`}
+                  className={`block py-3 px-4 hover:bg-muted hover:text-primary rounded-lg transition-all font-medium ${isActive ? 'bg-muted text-primary' : 'text-foreground'
+                    }`}
                   style={{ fontFamily: language === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif' }}
                 >
                   {t(item.ar, item.en)}
